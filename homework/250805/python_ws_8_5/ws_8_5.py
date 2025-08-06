@@ -6,6 +6,10 @@ class Cat():
     def sound(self):
         return "야옹"
 
-class Pet(Dog, Cat):
+class Pet(Cat, Dog):
     def __str__(self):
-        print (f"애완동물은 {self.sound()} 소리를 냅니다.")
+        return f"애완동물은 {self.sound()} 소리를 냅니다."
+
+pet1 = Pet()
+print (pet1)
+print (pet1)
