@@ -1,0 +1,21 @@
+{
+	"servers": {
+		"filesystem": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-filesystem",
+				"C:\\Users\\SSAFY\\Desktop\\mcp_practice"
+			]
+		},
+	    "image-reader": {
+			"command": "uvx",
+			"args": [
+				"gucken-image-reader"
+			],
+			"env": {
+				"OPENAI_API_KEY": ""
+			}
+		}
+	}
+}
