@@ -1,51 +1,65 @@
+import heapq
+
 class RESULT:
     def __init__(self, cnt, IDs):
         self.cnt = cnt
         self.IDs = IDs  # [int] * 5
 
-    price_list = [[] for _ in range(5)]
+    price_list = [[[] for _ in range(5)] for _ in range(5)]
+    discount_list = [[[] for _ in range(5)] for _ in range(5)]
+    mid_list = [[[] for _ in range(5)] for _ in range(5)]
     mart_id_price = {}
 
 
 def init():
-    global price_list, mart_id_price
-    price_list = [[] for _ in range(5) for _ in range(5)]
+    global price_list, mart_id_price, discount_list, mid_list
+    price_list = [[[] for _ in range(5)] for _ in range(5)]
     mart_id_price = {}
-    
+    discount_list = [[[] for _ in range(5)] for _ in range(5)]
+    mid_list = [[[] for _ in range(5)] for _ in range(5)]
 
-def sell(mID, mCategory, mCompanym,Price):
-    global price_list, mart_id_price
-    price_list[mCategory-1][mCompanym-1].append(Price)
-    
-    mart_id_price[mID] = [mCategory-1, mCompanym-1, len(price_list[mCategory-1][mCompanym-1])-1]
 
-    return len(price_list[mCategory-1][mCompanym-1])
+def sell(mID, mCategory, mCompanym, Price):
+    global price_list, mart_id_price, mid_list
+    mca = mCategory - 1
+    mco = mCompanym - 1
+    heapq.heappush(price_list[mca][mco], Price)  # 애초에 힙푸쉬로 입력
+    
+    mart_id_price[mID] = [mca, mco, Price]  # Mid 딕셔너리
+    mid_list[mca][mco].append(mart_id_price[mID])
+
+    return len(price_list[mca][mco])
 
 def closeSale(mID):
-    global price_list, mart_id_price
-    x = mart_id_price[mID][0]
-    y = mart_id_price[mID][1]
-    z = mart_id_price[mID][2]
-    
-    ans = -1
-    if price_list[x][y][z] > 0:
-        ans = price_list[x][y][z]
+    global price_list, mart_id_price, mid_list, mid_list
+    mca = mart_id_price[mID][0]
+    mco = mart_id_price[mID][1]
+    m_price = mart_id_price[mID][1]
 
-    return ans
+    if m_price in price_list[mca][mco]:
+        return m_price
+    else:
+        return -1
 
 def discount(mCategory, mCompany, mAmount):
-    x = mCategory-1
-    y = mCompany-1
+    global price_list, mart_id_price, discount_list, mid_list
+    mca = mCategory-1
+    mco = mCompany-1
+
+    discount_list[mca][mco] += mAmount
     
-    for idx in range(len(price_list[x][y])):
-        aaa = price_list[x][y][idx] - mAmount
-        if aaa < 0:
-            price_list[x][y].remove(price_list[x][y][idx])
-            mart_id_price[x, y, idx].remove(price_list[x][y][idx])
+    while True:
+        hh = heapq.heappop(price_list[mca][mco])
 
-        price_list[x][y][idx] = aaa
+        if hh - mAmount > 0:
+            heapq.heappush(price_list[mca][mco], hh)
+            break
+        else:
+            for idx in mid_list[mca][mco]:
+                if mart_id_price[idx][2] == hh:
+                    closeSale(idx)
 
-    return len(price_list[x][y])
+    return len(price_list[mca][mco])
 
 def show(mHow, mCode):
     ans_list =[]
