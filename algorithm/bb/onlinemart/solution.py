@@ -6,7 +6,7 @@ class RESULT:
         self.IDs = IDs  # [int] * 5
 
     price_list = [[[] for _ in range(5)] for _ in range(5)]
-    discount_list = [[[] for _ in range(5)] for _ in range(5)]
+    discount_list = [[0 for _ in range(5)] for _ in range(5)]
     mid_list = [[[] for _ in range(5)] for _ in range(5)]
     mart_id_price = {}
 
@@ -14,19 +14,18 @@ class RESULT:
 def init():
     global price_list, mart_id_price, discount_list, mid_list
     price_list = [[[] for _ in range(5)] for _ in range(5)]
-    mart_id_price = {}
-    discount_list = [[[] for _ in range(5)] for _ in range(5)]
+    discount_list = [[0 for _ in range(5)] for _ in range(5)]
     mid_list = [[[] for _ in range(5)] for _ in range(5)]
-
+    mart_id_price = {}
 
 def sell(mID, mCategory, mCompanym, Price):
-    global price_list, mart_id_price, mid_list
+    global price_list, mart_id_price, mid_list, discount_list
     mca = mCategory - 1
     mco = mCompanym - 1
-    heapq.heappush(price_list[mca][mco], Price)  # 애초에 힙푸쉬로 입력
+    heapq.heappush(price_list[mca][mco], Price+discount_list[mca][mco])  # 애초에 힙푸쉬로 입력
     
     mart_id_price[mID] = [mca, mco, Price]  # Mid 딕셔너리
-    mid_list[mca][mco].append(mart_id_price[mID])
+    mid_list[mca][mco].append(mID)
 
     return len(price_list[mca][mco])
 
@@ -49,8 +48,9 @@ def discount(mCategory, mCompany, mAmount):
     discount_list[mca][mco] += mAmount
     
     while True:
+        print (mca, mco)
+        print ()
         hh = heapq.heappop(price_list[mca][mco])
-
         if hh - mAmount > 0:
             heapq.heappush(price_list[mca][mco], hh)
             break
