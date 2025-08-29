@@ -12,6 +12,7 @@ def run1():
     for q in range(Q):
         input_iter = iter(input().split())
         cmd = int(next(input_iter))
+        print (cmd , "HHHHHHHHHHHHHHHHHHHH")
         if cmd == CMD_INIT:
             init()
             okay = True
@@ -54,7 +55,7 @@ def run1():
     return okay
 
 
-sys.stdin = open('taek/algorithm/bb/onlinemart/sample_input (36).txt', 'r')
+sys.stdin = open('sample_input (36).txt', 'r')
 
 T, MARK = map(int, input().split())
 
