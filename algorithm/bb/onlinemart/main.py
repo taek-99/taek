@@ -8,14 +8,11 @@ CMD_SHOW = 500
 
 
 def run1():
-    global  xxx
     Q = int(input())
     okay = False
     for q in range(Q):
         input_iter = iter(input().split())
         cmd = int(next(input_iter))
-        xxx += 1
-        print (xxx,cmd, "==================")
         if cmd == CMD_INIT:
             init()
             okay = True
@@ -28,14 +25,12 @@ def run1():
             ans = int(next(input_iter))
             if ret != ans:
                 okay = False
-            print (ret)
         elif cmd == CMD_CLOSE_SALE:
             mID = int(next(input_iter))
             ret = closeSale(mID)
             ans = int(next(input_iter))
             if ret != ans:
                 okay = False
-            print (ret)
         elif cmd == CMD_DISCOUNT:
             mCategory = int(next(input_iter))
             mCompany = int(next(input_iter))
@@ -44,7 +39,6 @@ def run1():
             ans = int(next(input_iter))
             if ret != ans:
                 okay = False
-            print (ans)
         elif cmd == CMD_SHOW:
             mHow = int(next(input_iter))
             mCode = int(next(input_iter))
@@ -64,7 +58,6 @@ sys.stdin = open('sample_input (36).txt','r')
 
 T, MARK = map(int, input().split())
 
-xxx = 0
 for tc in range(1, 2):
     score = MARK if run1() else 0
     print("#%d %d" % (tc, score), flush = True)
