@@ -1,82 +1,92 @@
-import heapq
+#로컬에서 테스트 시
+#solution.py와 main.py 파일을 구분해 주세요.
+#main.py의 import와 from와 sys.stdin 주석을 해제해 주세요.
 
+#제출 시 solution.py 부분만 변경하여 제출해 주세요.
+
+#####solution.py
 class RESULT:
     def __init__(self, cnt, IDs):
         self.cnt = cnt
         self.IDs = IDs  # [int] * 5
 
-    price_list = [[[] for _ in range(5)] for _ in range(5)]
-    discount_list = [[[] for _ in range(5)] for _ in range(5)]
-    mid_list = [[[] for _ in range(5)] for _ in range(5)]
-    mart_id_price = {}
+market_list = [[[[] for _ in range(120)] for _ in range(5)] for _ in range(5)] 
+discount_list = [[0 for _ in range(5)] for _ in range(5)] 
+id_list = [[[] for _ in range(5)] for _ in range(5)] 
 
 
 def init():
-    global price_list, mart_id_price, discount_list, mid_list
-    price_list = [[[] for _ in range(5)] for _ in range(5)]
-    mart_id_price = {}
-    discount_list = [[[] for _ in range(5)] for _ in range(5)]
-    mid_list = [[[] for _ in range(5)] for _ in range(5)]
+    global market_list, discount_list, id_list
+
+    market_list = [[[[] for _ in range(120)] for _ in range(5)] for _ in range(5)] 
+    discount_list = [[0 for _ in range(5)] for _ in range(5)] 
+    id_list = [[[] for _ in range(5)] for _ in range(5)] 
 
 
-def sell(mID, mCategory, mCompanym, Price):
-    global price_list, mart_id_price, mid_list
-    mca = mCategory - 1
-    mco = mCompanym - 1
-    heapq.heappush(price_list[mca][mco], Price)  # 애초에 힙푸쉬로 입력
+def sell(mID, mCategory, mCompany, mPrice):
+    global market_list, discount_list, id_list
     
-    mart_id_price[mID] = [mca, mco, Price]  # Mid 딕셔너리
-    mid_list[mca][mco].append(mart_id_price[mID])
+    bucket_idx = mPrice // 10000
+    mca = mCategory - 1
+    mco = mCompany - 1
+    price = mPrice + discount_list[mca][mco]
 
-    return len(price_list[mca][mco])
+    data = {
+        mID : [mca, mco, price]
+    }
+
+    # print (mca,mco,bucket_idx, data)
+    market_list[mca][mco][bucket_idx].append(data)
+    # print (market_list[mca][mco][bucket_idx])
+    id_list[mca][mco].append(mID)
+
+    return len(market_list[mca][mco][bucket_idx])
 
 def closeSale(mID):
-    global price_list, mart_id_price, mid_list, mid_list
-    mca = mart_id_price[mID][0]
-    mco = mart_id_price[mID][1]
-    m_price = mart_id_price[mID][1]
+    global market_list, discount_list, id_list
 
-    if m_price in price_list[mca][mco]:
-        return m_price
-    else:
-        return -1
+    for mca in range(5):
+        for mco in range(5):
+            for idx in range(120):
+                if market_list[mca][mco][idx]:
+                    for val in market_list[mca][mco][idx]:
+                        market_key = list(val.keys())[0]
+                        market_val = list(val.values())[0][2]
+                        if market_key == mID:
+                            if market_val - discount_list[mca][mco] > 0:
+                                return market_val - discount_list[mca][mco]
+                            else:
+                                return -1
+    return -1
 
 def discount(mCategory, mCompany, mAmount):
-    global price_list, mart_id_price, discount_list, mid_list
-    mca = mCategory-1
-    mco = mCompany-1
+    global market_list, discount_list, id_list
 
-    discount_list[mca][mco] += mAmount
-    
-    while True:
-        hh = heapq.heappop(price_list[mca][mco])
+    mca = mCategory - 1
+    mco = mCompany - 1
+    amount = discount_list[mca][mco] + mAmount
 
-        if hh - mAmount > 0:
-            heapq.heappush(price_list[mca][mco], hh)
+    for idx in range(120):
+        num = idx * 10000
+        if num > amount:
+            count_idx = idx
             break
-        else:
-            for idx in mid_list[mca][mco]:
-                if mart_id_price[idx][2] == hh:
-                    closeSale(idx)
 
-    return len(price_list[mca][mco])
+        if market_list[mca][mco][idx]:
+            market_list[mca][mco][idx] = []
+
+
+    cnt = 0
+    for idx in range(count_idx, 120):
+        if idx == count_idx:
+            for val in market_list[mca][mco][idx]:
+                if market_list[mca][mco][idx][val][2] > amount:
+                    cnt += 1
+        else:
+            if market_list[mca][mco][idx]:
+                cnt += len(market_list[mca][mco][idx])
+
+    return cnt
 
 def show(mHow, mCode):
-    ans_list =[]
-    ans_pos = set()
-
-    for _ in range(5):
-        min_num = 10 ** 10
-        min_pos = (-1, -1)
-        for i in range(5):
-            for j in range(5):
-                for k in range(len(price_list[i][j])):
-                    if min_num > price_list[i][j][k] and min_pos not in ans_pos:
-                        min_num = price_list[i][j][k]
-                        min_pos = (i, j)
-
-        if min_pos != (-1, -1):
-            ans_list.append(min_num)
-
-
-    return RESULT(-1, ans_list)
+    return RESULT(-1, [0, 0, 0, 0, 0])
