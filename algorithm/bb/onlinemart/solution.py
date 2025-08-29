@@ -10,6 +10,7 @@ class RESULT:
         self.cnt = cnt
         self.IDs = IDs  # [int] * 5
 
+<<<<<<< HEAD
 market_list = [[[[] for _ in range(120)] for _ in range(5)] for _ in range(5)] 
 discount_list = [[0 for _ in range(5)] for _ in range(5)] 
 id_list = [[[] for _ in range(5)] for _ in range(5)] 
@@ -30,6 +31,29 @@ def sell(mID, mCategory, mCompany, mPrice):
     mca = mCategory - 1
     mco = mCompany - 1
     price = mPrice + discount_list[mca][mco]
+=======
+    price_list = [[[] for _ in range(5)] for _ in range(5)]
+    discount_list = [[0 for _ in range(5)] for _ in range(5)]
+    mid_list = [[[] for _ in range(5)] for _ in range(5)]
+    mart_id_price = {}
+
+
+def init():
+    global price_list, mart_id_price, discount_list, mid_list
+    price_list = [[[] for _ in range(5)] for _ in range(5)]
+    discount_list = [[0 for _ in range(5)] for _ in range(5)]
+    mid_list = [[[] for _ in range(5)] for _ in range(5)]
+    mart_id_price = {}
+
+def sell(mID, mCategory, mCompanym, Price):
+    global price_list, mart_id_price, mid_list, discount_list
+    mca = mCategory - 1
+    mco = mCompanym - 1
+    heapq.heappush(price_list[mca][mco], Price+discount_list[mca][mco])  # 애초에 힙푸쉬로 입력
+    
+    mart_id_price[mID] = [mca, mco, Price]  # Mid 딕셔너리
+    mid_list[mca][mco].append(mID)
+>>>>>>> 52ffc52bed26a23a3921d0289ecdc29000175de2
 
     data = {
         mID : [mca, mco, price]
@@ -62,6 +86,7 @@ def closeSale(mID):
 def discount(mCategory, mCompany, mAmount):
     global market_list, discount_list, id_list
 
+<<<<<<< HEAD
     mca = mCategory - 1
     mco = mCompany - 1
     amount = discount_list[mca][mco] + mAmount
@@ -70,6 +95,16 @@ def discount(mCategory, mCompany, mAmount):
         num = idx * 10000
         if num > amount:
             count_idx = idx
+=======
+    discount_list[mca][mco] += mAmount
+    
+    while True:
+        print (mca, mco)
+        print ()
+        hh = heapq.heappop(price_list[mca][mco])
+        if hh - mAmount > 0:
+            heapq.heappush(price_list[mca][mco], hh)
+>>>>>>> 52ffc52bed26a23a3921d0289ecdc29000175de2
             break
 
         if market_list[mca][mco][idx]:

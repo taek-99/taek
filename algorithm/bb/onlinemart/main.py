@@ -14,8 +14,12 @@ def run1():
     for q in range(Q):
         input_iter = iter(input().split())
         cmd = int(next(input_iter))
+<<<<<<< HEAD
         xxx += 1
         print (xxx,cmd, "==================")
+=======
+        print (cmd , "HHHHHHHHHHHHHHHHHHHH")
+>>>>>>> 52ffc52bed26a23a3921d0289ecdc29000175de2
         if cmd == CMD_INIT:
             init()
             okay = True
@@ -61,7 +65,11 @@ def run1():
     return okay
 
 
+<<<<<<< HEAD
 sys.stdin = open('sample_input (36).txt','r')
+=======
+sys.stdin = open('sample_input (36).txt', 'r')
+>>>>>>> 52ffc52bed26a23a3921d0289ecdc29000175de2
 
 T, MARK = map(int, input().split())
 
