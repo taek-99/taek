@@ -52,12 +52,13 @@ def run1():
                     okay = False
         else:
             okay = False
+        
     return okay
 
 sys.stdin = open('sample_input (36).txt','r')
 
 T, MARK = map(int, input().split())
 
-for tc in range(1, 2):
+for tc in range(1, T+1):
     score = MARK if run1() else 0
     print("#%d %d" % (tc, score), flush = True)
