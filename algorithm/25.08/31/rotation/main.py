@@ -8,3 +8,5 @@ b = list(zip(*aaa[::-1]))
 print (*b)
 c = list(zip(*aaa))[::-1]
 print (*c)
+d = aaa[::-1]
+print (*d)
