@@ -1,0 +1,24 @@
+{% extends "articles/base.html" %}
+
+{% block content %}
+<h1>게시글 작성 페이지(new)</h1>
+
+<form action="{% url "articles:create" %}" method="POST">
+    {% csrf_token %}
+    
+    <div>
+        <label for="title">제목이다</label>
+        <input type="text" name="title" id="title">
+    </div>
+
+    <div>
+        <label for="content">내용이다</label>
+        <input type="content" name="content" id="content">
+    </div>
+
+    <input type="submit" value="게시글 저장하기">
+
+</form>
+    <hr>
+    <a href="{% url "articles:index" %}">돌아가기</a>
+{% endblock content %}

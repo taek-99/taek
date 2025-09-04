@@ -1,0 +1,23 @@
+{% extends "articles/base.html" %}
+
+{% block content %}
+<h1>DETAIL</h1>
+<h2>{{articles.pk}}번째 게시글</h2>
+<hr>
+
+<p>제목: {{articles.title}}</p>
+<p>내용: {{articles.content}}</p>
+<hr>
+<form action="{% url "articles:edit" articles.pk %}" method='POST'>
+    {% csrf_token %}
+    <input type="submit" value="이건 수정 버튼입">
+</form>
+
+
+<form action="{% url "articles:delete" articles.pk %}" method='POST'>
+    {% csrf_token %}
+    <input type="submit" value="게시글 삭제">
+</form>
+
+<a href="{% url "articles:index" %}"> [back]</a>
+{% endblock content %}
