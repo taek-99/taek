@@ -20,42 +20,34 @@ for tc in range(1, T+1):
             carrot.append(1)
             a = nums[i]
             
-
     ans = -1
     nn = len(carrot)
-    b_box = []
     m_box = []
     s_box = []
     bad_car = n // 2
 
-    for i in range(nn//3+1):
+    for i in range(nn):  # 작은 바구니
         s_box.append(carrot[i])
         if sum(s_box) > bad_car:
             break
         m_box = []
-        for j in range(i+1, i+nn//3+1):
+        for j in range(i+1, nn):  # 중간 바구니
             m_box.append(carrot[j])
             if sum(m_box) > bad_car:
                 break   
-            b_box = []
-            for k in range(j+1, j+nn//3+1):
-                b_box.append(carrot[k])
-                if sum(b_box) > bad_car:
-                    break
-
-            if not s_box:
-                break
-            if not m_box:
-                break
-            if not b_box:
-                break
             
-            print (s_box, m_box, b_box)
-            if len(s_box+m_box+b_box) == nn:
-                a = sum(s_box)
-                b = sum(m_box)
-                c = sum(b_box)
-                ans = min(abs(a-b), abs(a-c), abs(b-c))
+            a = sum(s_box)
+            b = sum(m_box)
+            c = sum(carrot[j+1:]) # 큰 바구니
+            
+            if a == 0 or b == 0 or c == 0 or c > bad_car:  # 비어있는 상자가 있으면 pass
+                continue    
+ 
+            aaa = max(a, b, c) - min(a, b, c)
+            if ans == -1:
+                ans = aaa
+            else:
+                ans = min(ans, aaa)
 
     print (f"#{tc} {ans}")
 
