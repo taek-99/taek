@@ -1,0 +1,48 @@
+package arr2;
+
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class arr2 {
+	public static void main(String[] args) {
+//		 선언
+		int [][] arr1;
+		int [] arr2[];
+		int arr3 [][];
+		
+		
+		int [][] arr4 = new int[2][3];
+		int a = 0 ;
+		for (int i = 0; i < arr4.length; i++) {
+			for (int j = 0; j < arr4[0].length; j++) {
+				a++;
+				arr4[i][j] = a;
+			}
+			
+		}
+		
+		for(int[] b: arr4) {
+			System.out.println(Arrays.toString(b));
+		}
+		
+		System.out.println("------------------------");
+		
+		int [][] arr5 = new int[5][];
+		System.out.println(Arrays.toString(arr5));
+		
+		arr5[0] = new int [] {1,2,3};
+		System.out.println(Arrays.deepToString(arr5));
+		
+		int [][] arr6 = new int[][] {{1,2,3},{4,5,6},{7,8,9}};
+		System.out.println(Arrays.deepToString(arr6));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}
