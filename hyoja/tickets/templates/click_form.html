@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>초고속 좌표 클릭 스케줄러</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 720px; margin: 40px auto; line-height: 1.6; }
+    label { display: block; margin: 12px 0 6px; font-weight: 600; }
+    input[type="number"], input[type="datetime-local"] { width: 100%; padding: 10px; box-sizing: border-box; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .row > div { display: flex; flex-direction: column; }
+    button { padding: 10px 16px; margin-right: 8px; cursor: pointer; }
+    .status { margin-top: 16px; color: #444; background: #f6f7f9; padding: 10px 12px; border-radius: 8px; }
+    .muted { color:#666; font-size: 0.95em; }
+  </style>
+</head>
+<body>
+  <h1>초고속 좌표 클릭 스케줄러</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <div class="row">
+      <div>
+        <label for="x">X 좌표 (픽셀)</label>
+        <input id="x" name="x" type="number" min="0" placeholder="예: 1723" required>
+      </div>
+      <div>
+        <label for="y">Y 좌표 (픽셀)</label>
+        <input id="y" name="y" type="number" min="0" placeholder="예: 423" required>
+      </div>
+    </div>
+
+    <label for="target_time">예약 시각 (로컬, Asia/Seoul)</label>
+    <input id="target_time" name="target_time" type="datetime-local" required>
+
+    <div style="margin-top:16px;">
+      <button type="submit" name="action" value="start">시작</button>
+      <button type="submit" name="action" value="stop">중지</button>
+    </div>
+  </form>
+
+  <div class="status">상태: {{ status }}</div>
+
+  <p class="muted" style="margin-top:10px;">
+    • T-1초부터 T+2초까지 좌표를 가능한 한 빠르게 클릭합니다.<br>
+    • 마우스를 화면 좌측 상단(0,0)으로 옮기면 <b>긴급 중지(FAILSAFE)</b> 됩니다.<br>
+    • <b>runserver 자동 리로드</b>가 스레드를 중복 실행할 수 있으니, 필요하면
+      <code>python manage.py runserver --noreload</code> 로 실행하세요.
+  </p>
+</body>
+</html>

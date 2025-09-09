@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block content %}
+  <h1>{{ event.title }}</h1>
+  <p>{{ event.venue.name }} / {{ event.starts_at }}</p>
+
+  <h3>좌석 선택</h3>
+  <form action="{% url 'events:hold' event.pk %}" method="post">
+    {% csrf_token %}
+    <div id="seat-list">
+      <!-- 간단히 리스트로 표기. 실제로는 JS로 availability를 불러와 그리드를 만들면 좋아요 -->
+      {% comment %} 서버 렌더로도 가능하지만 데모에선 정적 목록 없이 넘어갑니다 {% endcomment %}
+    </div>
+    <input type="text" name="inventory_ids" placeholder="인벤토리 ID 콤마 입력 예: 12,13">
+    <button type="submit">5분 홀드</button>
+  </form>
+
+  {% if request.session.hold_token %}
+  <hr>
+  <h3>결제 확정</h3>
+  <form action="{% url 'events:checkout_confirm' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="hold_token" value="{{ request.session.hold_token }}">
+    <button type="submit">결제확정 (데모)</button>
+  </form>
+  {% endif %}
+
+  <p style="margin-top:1rem;">
+    <a href="{% url 'events:availability' event.pk %}" target="_blank">좌석 상태(JSON)</a>
+  </p>
+{% endblock %}

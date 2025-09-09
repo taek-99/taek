@@ -1,0 +1,8 @@
+{% extends "articles/base.html" %}
+
+{% block content %}
+<form action="{% url "articles:search_result" %}" method="GET">
+  <input type="number" name="num" id="num">
+  <input type="submit" value="찾아보기">
+</form>
+{% endblock content %}

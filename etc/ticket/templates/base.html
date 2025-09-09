@@ -1,0 +1,15 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}티켓팅{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+</head>
+<body>
+  <main class="container">
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>

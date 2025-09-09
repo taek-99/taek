@@ -1,0 +1,17 @@
+{% extends "articles/base.html" %} {% block content %}
+<h1>NEW</h1>
+<form action="{% url "articles:create" %}" method="POST">
+    {% csrf_token %}
+  <div>
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" />
+  </div>
+  <div>
+    <label for="content">Content:</label>
+    <textarea name="content" id="content"></textarea>
+  </div>
+  <input type="submit" value="게시글 작성" />
+</form>
+<hr>
+<a href="{% url "articles:index" %}">전체 게시글로 돌아가기</a>
+{% endblock content %}
