@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}이벤트 목록{% endblock %}
+{% block content %}
+  <h1>이벤트 목록</h1>
+  <ul>
+    {% for e in events %}
+      <li>
+        <a href="{% url 'events:detail' e.pk %}">
+          {% if e.poster %}
+            <img src="{{ e.poster.url }}" alt="{{ e.title }}" style="width:150px;height:150px;object-fit:cover;">
+          {% endif %}
+          <div>{{ e.title }} — {{ e.venue.name }} ({{ e.starts_at }})</div>
+        </a>
+      </li>
+    {% empty %}
+      <li>등록된 이벤트가 없습니다.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
