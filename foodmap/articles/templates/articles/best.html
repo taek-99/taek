@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>Best 필터 프로토타입</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --bd:#e5e7eb; --fg:#111; --muted:#666; --bg:#fff; --on:#111; --onfg:#fff; }
+    * { box-sizing: border-box; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { margin: 0 0 16px; }
+    .muted { color: var(--muted); font-size: .95rem; }
+    form { display: grid; gap: 16px; max-width: 640px; }
+
+    .group { display: grid; gap: 8px; }
+    .label { font-weight: 700; }
+
+    /* Segmented toggle (라디오 스타일 토글) */
+    .seg { display: inline-flex; border: 1px solid var(--bd); border-radius: 999px; overflow: hidden; }
+    .seg input { display: none; }
+    .seg label {
+      padding: 10px 16px; cursor: pointer; user-select: none;
+      border-right: 1px solid var(--bd);
+    }
+    .seg label:last-of-type { border-right: 0; }
+    .seg input:checked + label { background: var(--on); color: var(--onfg); }
+
+    /* 버튼 */
+    button { padding: 10px 14px; border: 1px solid var(--bd); border-radius: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🍽️ Best 필터</h1>
+  <p class="muted">프로토타입: 토글만 있는 버전 (제출 시 GET 파라미터로 전송)</p>
+
+  <form method="get" action="">
+    <!-- 종류: 밥 / 면 -->
+    <div class="group">
+      <div class="label">종류</div>
+      <div class="seg">
+        <input type="radio" id="kind_rice" name="kind" value="rice">
+        <label for="kind_rice">밥</label>
+
+        <input type="radio" id="kind_noodle" name="kind" value="noodle">
+        <label for="kind_noodle">면</label>
+      </div>
+    </div>
+
+    <!-- 맵기: 매운거 / 안매운거 -->
+    <div class="group">
+      <div class="label">맵기</div>
+      <div class="seg">
+        <input type="radio" id="spicy_hot" name="spicy" value="hot">
+        <label for="spicy_hot">매운거</label>
+
+        <input type="radio" id="spicy_mild" name="spicy" value="mild">
+        <label for="spicy_mild">안매운거</label>
+      </div>
+    </div>
+
+    <!-- 온도: 차가운거 / 따뜻한거 -->
+    <div class="group">
+      <div class="label">온도</div>
+      <div class="seg">
+        <input type="radio" id="temp_cold" name="temp" value="cold">
+        <label for="temp_cold">차가운거</label>
+
+        <input type="radio" id="temp_warm" name="temp" value="warm">
+        <label for="temp_warm">따뜻한거</label>
+      </div>
+    </div>
+
+    <!-- 금액대: 저렴 / 중간 / 비쌈 -->
+    <div class="group">
+      <div class="label">금액대</div>
+      <div class="seg">
+        <input type="radio" id="price_cheap" name="price" value="cheap">
+        <label for="price_cheap">저렴</label>
+
+        <input type="radio" id="price_mid" name="price" value="mid">
+        <label for="price_mid">중간</label>
+
+        <input type="radio" id="price_exp" name="price" value="exp">
+        <label for="price_exp">비쌈</label>
+      </div>
+    </div>
+
+    <button type="submit">필터 적용</button>
+    {% if dish %}
+      <div class="result">추천: {{ dish }}</div>
+    {% endif %}
+  </form>
+
+
+</body>
+</html>

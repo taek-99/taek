@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>내 주변 음식점 (결과)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
+    .muted { color:#666; font-size:0.95rem; }
+    .list { display: grid; gap: 10px; margin-top: 16px; }
+    .card { border: 1px solid #eee; padding: 10px 12px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🍜 주변 음식점</h1>
+  <p class="muted">기준 좌표: lat={{ lat }}, lng={{ lng }}, 반경 {{ radius }}m — 총 {{ count }}건</p>
+
+  {% if items %}
+    <div class="list">
+      {% for it in items %}
+        <div class="card">
+          <div><b>{{ forloop.counter }}. {{ it.name }}</b></div>
+          <div class="muted">{{ it.addr }}</div>
+          <div class="muted">{{ it.category }}</div>
+          <div class="muted">
+            {% if it.phone %}☎ {{ it.phone }} · {% endif %}{{ it.distance_m }}m
+          </div>
+          <div><a href="{{ it.url }}" target="_blank" rel="noreferrer">상세보기</a></div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>결과가 없습니다.</p>
+  {% endif %}
+
+  <p style="margin-top:16px;"><a href="{% url 'articles:index' %}">← 다시 검색</a></p>
+</body>
+</html>
