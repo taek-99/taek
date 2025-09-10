@@ -1,0 +1,52 @@
+package class_practice;
+
+import java.util.Random;
+
+public class test1 {
+
+	public static void main(String[] args) {
+		
+		System.out.println("ㅎㅇ1");
+		System.out.println("ㅎㅇ2");
+		aa();
+		
+		System.out.println(aaa());
+		
+		move(1, 3);
+		System.out.println("ㅎㅇ5");
+		System.out.println("ㅎㅇ66y");
+
+		
+	}
+	
+	
+	public static void aa() {
+		
+		System.out.println("ㅎㅇ3");
+		System.out.println("ㅎㅇ4");
+	}
+	
+	
+	public static void move(int a, int b) {
+		System.out.println(a+b);
+		
+	}
+	
+	public static int aaa() {
+		
+		return new Random().nextInt(10);
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
