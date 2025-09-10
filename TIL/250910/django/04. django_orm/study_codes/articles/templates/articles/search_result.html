@@ -1,0 +1,5 @@
+{% extends "articles/base.html" %}
+
+{% block content %}
+<a href="{% url "articles:detail" num %}">여기를 누르면 {{ num }}디테일 페이지로 갑니다.</a>
+{% endblock content %}

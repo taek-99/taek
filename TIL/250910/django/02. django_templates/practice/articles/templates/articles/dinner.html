@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>{{ foods }}</h1>
+  <h2>랜덤하게 선정된 메뉴는 {{ pick_me }} 이고, {{ pick_me|length }}</h2>
+  <ul>메뉴판</ul>
+  {% for food in foods %}
+    <li>{{ food }}</li>
+  {% endfor %}
+
+  {% if foods|length == 0 %}
+  <h1>음식이 없습니다.</h1>
+  {% else %}
+  <h2>음식이 있습니다. </h2>
+  {% endif %}
+</body>
+</html>
