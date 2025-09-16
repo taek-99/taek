@@ -1,9 +1,9 @@
 import sys
-sys.stdin = open('input (4).txt','r')
+sys.stdin = open('taek/algorithm/25.09/15/sea1231/input (4).txt','r')
 
 T = 10
 
-for tc in range(1, T+1):
+for tc in range(1, 2):
     n = int(input())
 
     tree = [[] for _ in range(n+1)]
@@ -34,9 +34,10 @@ for tc in range(1, T+1):
         if len(kids) == 2:  # 오른쪽 노드
             nodes[i].right = nodes[kids[1]]
 
-
+    print (nodes)
     def inoder_ans(root):
         global ans
+
         if root:
             inoder_ans(root.left)
             ans += tree[root.value]

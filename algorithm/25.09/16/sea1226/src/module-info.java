@@ -4,5 +4,5 @@
 /**
  * 
  */
-module cs_prac {
+module sea1226java {
 }
