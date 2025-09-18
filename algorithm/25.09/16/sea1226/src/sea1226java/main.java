@@ -44,7 +44,7 @@ public class main {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		File file = new File("input (4).txt");
-		Scanner sc = new Scanner(file);
+		Scanner sc = new Scanner(System.in);
 			
 		
 		for (int t = 1; t < 11; t++) {
