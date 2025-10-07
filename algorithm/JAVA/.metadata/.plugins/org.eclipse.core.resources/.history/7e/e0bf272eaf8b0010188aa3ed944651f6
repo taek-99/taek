@@ -1,0 +1,13 @@
+package java연산;
+
+public class test1 {
+	public static void main(String[] args) {
+		int a = 101;
+		int b = 10;
+		int c = a/b;
+
+		
+		System.out.println(c);
+	}
+
+}

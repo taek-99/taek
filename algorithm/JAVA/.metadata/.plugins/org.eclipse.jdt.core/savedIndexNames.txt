@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+C:\Users\SGH\Desktop\importance\taek\algorithm\JAVA\.metadata\.plugins\org.eclipse.jdt.core
+2935893749.index
+988853115.index
+103205096.index
+2250130128.index
+1865797976.index

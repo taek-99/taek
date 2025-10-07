@@ -1,0 +1,17 @@
+package arr2;
+
+import java.util.Arrays;
+
+public class arr2 {
+	public static void main(String[] args) {
+//		 선언
+		int [][] arr1;
+		int [] arr2[];
+		int arr3 [][];
+		
+		
+		int [][] arr4 = new int[2][3];
+		System.out.println(Arrays.toString(arr4));
+		System.out.println(arr4[0][0]);
+	}
+}

@@ -1,0 +1,12 @@
+package test1;
+
+
+
+public class hello {
+	public static void main(String[] args) {
+		int a;
+	
+		
+		System.out.print(a);
+	}
+}

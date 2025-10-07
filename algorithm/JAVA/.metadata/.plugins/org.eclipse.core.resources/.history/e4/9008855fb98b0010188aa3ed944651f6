@@ -1,0 +1,22 @@
+package java연산;
+
+import java.util.Arrays;
+
+public class array {
+
+	public static void main(String[] args) {
+		int [] arr1 = {1,2,3,4,5};
+		
+//		String[] arr2 = new String[10];
+//		int [] arr3 = new int[] {1,2,3,4,5};
+//		int [] arr4 = {1,2,3,4,5,6};
+//		
+		System.out.println(Arrays.toString(arr1));
+//		System.out.println(Arrays.toString(arr2));
+//		System.out.println(Arrays.toString(arr3));
+//		System.out.println(Arrays.toString(arr4));
+		
+		
+		
+	}
+}

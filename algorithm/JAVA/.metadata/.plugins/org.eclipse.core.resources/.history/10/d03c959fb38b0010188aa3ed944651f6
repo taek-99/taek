@@ -1,0 +1,23 @@
+package java연산;
+
+public class control_St {
+	public static void main(String[] args) {
+
+		int a = 80;
+		
+		if (a >= 90) {
+			System.out.println("a");
+		}else {
+			if (a >= 80) {
+				System.out.println("b");
+			}else {
+				if (a >= 70) {
+					System.out.println("c");
+				}
+			}
+		}
+
+
+
+	}
+}

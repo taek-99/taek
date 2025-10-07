@@ -1,0 +1,16 @@
+package java연산;
+
+import java.util.Arrays;
+
+public class array {
+
+	public static void main(String[] args) {
+		int [] arr1 = new int[10];
+		String[] arr2 = new String[10];
+		
+		System.out.println(Arrays.toString(arr1));
+		System.out.println(Arrays.toString(arr2));
+		
+		
+	}
+}

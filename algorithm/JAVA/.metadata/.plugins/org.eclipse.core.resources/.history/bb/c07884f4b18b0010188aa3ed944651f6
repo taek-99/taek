@@ -1,0 +1,36 @@
+package java연산;
+
+public class test_boolean {
+	public static void main(String[] args) {
+//		int a = 100;
+//		int b = 50;
+//		
+//		a += 10;
+//		
+//		System.out.println(a);
+//		System.out.println(a == b);
+//		System.out.println(a != b);
+//		System.out.println(a >= b);
+//		System.out.println(a <= b);
+//		
+//		a++;
+//		
+//		System.out.println(a);
+		
+		int aa = 100;
+		int bb = 100;
+	
+		
+		System.out.println(aa);
+		System.out.println(++aa + aa--);
+		System.out.println(++bb + bb-- + bb + --bb);
+		
+		
+		int q = 1000;
+		int w = 500;
+		
+		System.out.println(q > w ? q : w);
+	}
+		
+}
+ 

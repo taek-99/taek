@@ -1,0 +1,19 @@
+package class_practice;
+
+public class test1 {
+	public static void main(String[] args) {
+		System.out.println('이건 1이다');
+		System.out.println('이건 1이다');
+		System.out.println('이건 1이다');
+		System.out.println('이건 1이다');
+		System.out.println('이건 1이다');
+		System.out.println('이건 1이다');
+		
+	}
+	
+	
+	public static void aa() {
+		
+		
+	}
+}

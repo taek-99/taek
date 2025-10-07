@@ -1,0 +1,15 @@
+package java연산;
+
+public class control_St {
+	public static void main(String[] args) {
+
+		int a = 50;
+
+		if (a == 100) {
+			System.out.println("난 100살");
+		} else {
+			System.out.println("100살 아님");
+		}
+
+	}
+}
