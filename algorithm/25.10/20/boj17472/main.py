@@ -70,12 +70,30 @@ for val, node_list in island_dict.items():
                             break
                     break
 
-for val in p_list.keys():
-    print (val, p_list[val])
 
 
+min_heap = []
+island_visited = set()
+heap_board = {i: float("inf") for i in island_dict.keys()}
+heapq.heappush(min_heap, (0, num_list[0]))
+heap_board[num_list[0]] = 0
 
 
-    
+ans = 0
+while min_heap:
+    w, pos = heapq.heappop(min_heap)
 
-            
+    if pos in island_visited:
+        continue
+
+    ans += w
+    island_visited.add(pos)
+    for next_pos, val in p_list[pos]:
+        if next_pos not in island_visited:
+            heapq.heappush(min_heap, (val, next_pos))
+
+
+if len(island_visited) == len(num_list):
+    print (ans)
+else:
+    print (-1)
