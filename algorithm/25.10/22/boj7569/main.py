@@ -11,7 +11,11 @@ for _ in range(n):
     for i in range(ed_pos, ed_pos+10):
         for j in range(st_pos, st_pos+10):
             if not board[i][j]:
-                ans += 1
                 board[i][j] = True
+
+for i in range(k):
+    for j in range(k):
+        if board[i][j]:
+            ans += 1
 
 print (ans)
