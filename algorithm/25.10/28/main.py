@@ -1,67 +1,63 @@
-import copy
+
+from collections import deque
 
 m, n, h = map(int, input().split())
 board = [[list(map(int, input().split())) for _ in range(n)] for _ in range(h)]
-visited = [[[False]*m for _ in range(n)] for _ in range(h)]
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 dz = [-1, 1]
 
-def answer():
+def ans():
     for i in range(h):
         for j in range(n):
             for k in range(m):
                 if board[i][j][k] == 0:
                     return False
-    
     return True
 
+q = deque()
+for i in range(h):
+    for j in range(n):
+        for k in range(m):
+            if board[i][j][k] == 1:
+                q.append((i, j, k))
 
-if answer ():
-    print (0)
-    exit()
 
 tt = 1
-while True:
-    tomato = False
+new_q = deque()
+while tt:
+    new_q = q
+    q = deque()
 
-    tomato_board = copy.deepcopy(board)
-    for i in range(h):
-        for j in range(n):
-            for k in range(m):
-                # print (i, j, k)
-                if tomato_board[i][j][k] == 1 and not visited[i][j][k]:
-                    tomato = True
-                    visited[i][j][k] = True
+    while new_q:
+        z, x, y = new_q.popleft()
 
-                    for d in range(4):  # 앞, 뒤, 좌, 우
-                        nx = j + dx[d]
-                        ny = k + dy[d]
+        for d in range(4):  # 앞, 뒤, 좌, 우
+            nx = x + dx[d]
+            ny = y + dy[d]
 
-                        if not (0 <= nx < n and 0 <= ny < m):
-                            continue
+            if not (0 <= nx < n and 0 <= ny < m):
+                continue
 
-                        if board[i][nx][ny] == 0:
-                            board[i][nx][ny] = 1
+            if board[z][nx][ny] == 0:
+                board[z][nx][ny] = 1
+                q.append((z, nx, ny))
+            
+        for d in range(2):  # 위, 아래
+            nz = z + dz[d]
+            if not (0 <= nz < h):
+                continue
 
+            if board[nz][x][y] == 0:
+                board[nz][x][y] = 1
+                q.append((nz, x, y))
 
-                    for d in range(2):  # 위, 아래
-                        nz = i + dz[d]
-                        if not (0 <= nz < h):
-                            continue
-                        
-                        if board[nz][j][k] == 0:
-                            board[nz][j][k] = 1
-
-
-   
-    if answer ():
-        print (tt)
-        break
-    else:
-        if not tomato:
+    if not q: 
+        if ans():
+            print (tt-1)
+        else:
             print (-1)
-            break
+        break
 
     tt += 1
