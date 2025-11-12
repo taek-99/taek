@@ -61,6 +61,8 @@ sns.pairplot(df[['mpg', 'weight', 'acceleration']], corner=True, kind='reg', plo
 - 선형회귀 모델은 추세선 방정식을 의미한다
 - 이 추세선을 찾아내면, 미래 데이터 예측 가능
 
+
+
 ```python
 
 tips = sns.load_dataset('tips')
