@@ -26,7 +26,7 @@ public class Main1 {
 			array[i] = array[i]/max_ans * 100;
 		}
 		
-		int ans = 0;
+		double ans = 0;
 		
 		for(int i = 0; i < n; i++) {
 			
