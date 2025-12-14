@@ -11,6 +11,11 @@ public class Main {
         int B = sc.nextInt();
         int V = sc.nextInt();
 
+        if (A >= V) {
+            System.out.println(1);
+            return;
+        }
+        
         int day = (V - B - 1) / (A - B) + 1;
         System.out.println(day);
 	}
