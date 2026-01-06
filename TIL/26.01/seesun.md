@@ -6,6 +6,7 @@
 - Library: React, Redux
 - Framework: NextJs
 - STT: Whisper(오픈 AI)
+- App 배포: Capacitor
 
 
 ## 프론트엔드팀 요구사항 & 질문 사항
